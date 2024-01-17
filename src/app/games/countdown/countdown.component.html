@@ -1,0 +1,22 @@
+<div *ngIf="!started" style="height: 100%;">
+    <div style="height: 90%;" class="d-flex justify-content-center align-items-center">
+        <span style="font-size: 8em;">10</span>
+        <span class="text-secondary" style="font-size: 2em;">.000</span>
+    </div>
+    <button type="button" class="btn btn-outline-secondary btn-lg" (click)="startCountdown()">START</button>
+</div>
+
+<div *ngIf="started" style="height: 100%;">
+    <div style="height: 90%;" class="d-flex justify-content-center align-items-center">
+        <span style="font-size: 8em;">{{seconds}}</span>
+        <span class="text-secondary" style="font-size: 2em;">.{{milliseconds}}</span>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div *ngIf="!stopped">
+            <button type="button" class="btn btn-outline-secondary btn-lg" (click)="stopCountdown()">STOP</button>
+        </div>
+        <div *ngIf="stopped">
+            <button type="button" class="btn btn-outline-secondary btn-lg" (click)="startCountdown()">RESTART</button>
+        </div>
+    </div>
+</div>

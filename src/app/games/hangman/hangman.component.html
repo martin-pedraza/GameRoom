@@ -1,0 +1,49 @@
+<div class="d-flex flex-column justify-content-around" style="height: 100%">
+    <div class="d-flex justify-content-around align-items-center">
+        <img [src]="actualStage" alt="" height="250px">
+        
+        <div class="d-flex flex-column">
+            <p>
+                <b *ngFor="let letter of guess;"> {{letter}} </b>
+            </p>
+            
+            <p *ngIf="end">
+            <button type="button" class="btn btn-outline-secondary" (click)="restarGame()">AGAIN</button>
+            </p>
+        </div>
+    </div>
+    
+    <div class="d-flex flex-column">
+        <div class="d-flex justify-content-evenly align-items-center flex-wrap w-100 my-2">
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('A')">A</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('B')">B</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('C')">C</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('D')">D</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('E')">E</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('F')">F</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('G')">G</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('H')">H</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('I')">I</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('J')">J</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('K')">K</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('L')">L</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('M')">M</button>
+        </div>
+        <div class="d-flex justify-content-evenly align-items-center flex-wrap w-100 my-2">
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('N')">N</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('O')">O</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('P')">P</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('Q')">Q</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('R')">R</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('S')">S</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('T')">T</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('U')">U</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('V')">V</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('W')">W</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('X')">X</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('Y')">Y</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="verifyLetter('Z')">Z</button>
+        </div>
+    </div>
+    
+</div>

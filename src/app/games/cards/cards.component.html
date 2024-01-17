@@ -1,0 +1,47 @@
+<div class="beautiful p-3">
+  <div class="row d-flex justify-content-between align-items-center">
+    <div class="col-6 d-flex justify-content-center align-items-center">
+        <h1 class="mt-4 d-flex justify-content-center align-items-center">SCORE: {{ points }}</h1>
+    </div>
+    <ng-template [ngIf]="gameOver">
+      <div class="col-6 d-flex justify-content-center align-items-center">
+        <button
+          type="button"
+          class="btn btn-secondary float-end"
+          (click)="restartGame()"
+        >
+          AGAIN
+        </button>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="d-flex justify-content-evenly">
+    <div>
+      <img [src]="currentCard" alt="" width="150px" />
+    </div>
+    
+    <div class="d-flex flex-column justify-content-around">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="onHigher()"
+        [disabled]="gameOver"
+      >
+        HIGHER
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="onLower()"
+        [disabled]="gameOver"
+      >
+        LOWER
+      </button>
+    </div>
+    
+    <div>
+      <img [src]="nextCard" alt="" width="150px" />
+    </div>
+  </div>
+</div>

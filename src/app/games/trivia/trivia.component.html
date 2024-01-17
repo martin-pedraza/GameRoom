@@ -1,0 +1,33 @@
+<ng-template [ngIf]="!started">
+    <div class="d-flex justify-content-evenly mw-100 flex-wrap align-items-center" style="height: 75%">
+      <div *ngFor="let image of characters" >
+        <img src="{{ image }}" alt="" width="150px" height="150px"/>
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-secondary" (click)="startGame()">
+        START GAME
+    </button>
+</ng-template>
+
+<div *ngIf="started" style="height: 100%;">
+    <div class="d-flex flex-column justify-content-center align-items-center row" style="height: 100%; width: 100%;">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="col-2">
+                <img [src]="currentCharacter" alt="" width="150px" height="150px">
+            </div>
+            <div class="col-8">
+                <p [innerHTML]="questions.results[currentQuestionIndex]?.question"></p>
+            </div>
+            <div class="col-2">
+                <p class="border border-secondary">Score: {{score}}</p>
+            </div>
+        </div>
+    
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <div *ngFor="let option of mixedOptions.slice(currentQuestionIndex * 4, (currentQuestionIndex + 1) * 4)">
+                <button type="button" class="btn btn-outline-secondary" (click)="verifyAnswer(option)">{{ option }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
