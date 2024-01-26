@@ -20,22 +20,18 @@ const routes: Routes = [
       {
         path: "cards",
         component: CardsComponent,
-        canActivate: [LoggedUserGuard],
       },
       {
         path: "hangman",
         component: HangmanComponent,
-        canActivate: [LoggedUserGuard],
       },
       {
         path: "trivia",
         component: TriviaComponent,
-        canActivate: [LoggedUserGuard],
       },
       {
         path: "countdown",
         component: CountdownComponent,
-        canActivate: [LoggedUserGuard],
       },
     ],
   }

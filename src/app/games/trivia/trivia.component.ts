@@ -9,13 +9,16 @@ import { TriviaService } from 'src/app/services/trivia/trivia.service';
 })
 export class TriviaComponent implements OnDestroy {
   characters: string[] = this.triviaService.characters;
+  intro: boolean = true;
   started: boolean = false;
+  finished: boolean = false;
   suscription: Subscription | undefined;
   questions: any | undefined;
   currentQuestionIndex: number = 0;
   currentCharacter: string = '';
   mixedOptions: string[] = [];
   score: number = 0;
+  disabledButtons = false;
 
   constructor(private triviaService: TriviaService) {}
 
@@ -24,6 +27,7 @@ export class TriviaComponent implements OnDestroy {
   }
 
   startGame() {
+    this.intro = false;
     this.started = true;
     this.score = 0;
     this.currentQuestionIndex = 0;
@@ -43,12 +47,9 @@ export class TriviaComponent implements OnDestroy {
   }
 
   mixOptions() {
-    if (this.questions.results) {
-      for (const question of this.questions.results) {
-        const options = [
-          question.correct_answer,
-          ...question.incorrect_answers,
-        ];
+    if (this.questions) {
+      for (const question of this.questions) {
+        const options = [question.correctAnswer, ...question.incorrectAnswers];
         this.shuffleArray(options);
         this.mixedOptions.push(...options);
       }
@@ -68,21 +69,48 @@ export class TriviaComponent implements OnDestroy {
 
   nextQuestion() {
     this.currentQuestionIndex++;
-    if (this.currentQuestionIndex >= this.questions.results.length) {
+    if (this.currentQuestionIndex >= this.questions.length) {
       this.finishGame();
     }
   }
 
   verifyAnswer(answer: string) {
-    if (
-      this.questions.results[this.currentQuestionIndex].correct_answer == answer
-    ) {
+    this.disableButtons();
+    if (this.questions[this.currentQuestionIndex].correctAnswer == answer) {
       this.score++;
     }
-    this.nextQuestion();
+    this.paintAnswer(answer);
+
+    setTimeout(() => {
+      this.nextQuestion();
+    }, 2000);
+  }
+
+  paintAnswer(answer: string) {
+    const correctAnswer = this.questions[this.currentQuestionIndex].correctAnswer;
+    
+    if (answer !== correctAnswer) {
+      const selectedAnswer = document.getElementById(answer);
+      if (selectedAnswer) {
+        selectedAnswer.style.backgroundColor = 'red';
+      }
+    }
+    
+    const correctAnswerElement = document.getElementById(correctAnswer);
+    if (correctAnswerElement) {
+      correctAnswerElement.style.backgroundColor = 'green';
+    }
+  }
+
+  disableButtons() {
+    this.disabledButtons = true;
+    setTimeout(() => {
+      this.disabledButtons = false;
+    }, 2000);
   }
 
   finishGame() {
     this.started = false;
+    this.finished = true;
   }
 }

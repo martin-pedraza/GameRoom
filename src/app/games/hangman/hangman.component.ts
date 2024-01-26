@@ -70,6 +70,7 @@ export class HangmanComponent implements OnInit {
   restarGame() {
     this.letters = [];
     this.word = [];
+    this.guess = [];
     this.getNewWord();
     this.attempts = 0;
     this.updateStage(0);

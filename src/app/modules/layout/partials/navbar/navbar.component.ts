@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public Logout() {
     this.userService.Logout();
     this.userService.logged = false;
+    localStorage.clear();
     this.router.navigateByUrl('home');
   }
 
@@ -36,6 +37,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.suscription = this.auth.onAuthStateChanged((user) => {
       if (user && user.email) {
         this.correoLogueado = user.email;
+        localStorage.setItem('user', user.email.split('@')[0]);
+        console.log(localStorage.getItem('user'));
       } else {
         this.correoLogueado = '';
       }

@@ -13,12 +13,12 @@
           <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/user">Student profile</a>
+          <a class="nav-link" routerLink="/user">Developer profile</a>
         </li>
-        <li class="nav-item" *ngIf="correoLogueado!=''">
-          <a class="nav-link">Results</a>
+        <li class="nav-item" *ngIf="correoLogueado != ''">
+          <a class="nav-link" routerLink="/results">Results</a>
         </li>
-        <li class="nav-item" *ngIf="correoLogueado!=''">
+        <li class="nav-item" *ngIf="correoLogueado != ''">
           <a class="nav-link" routerLink="/chat">Chat</a>
         </li>
         <li class="nav-item dropdown">
@@ -26,9 +26,9 @@
             Account
           </div>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/login" *ngIf="correoLogueado==''">Login</a></li>
-            <li><a class="dropdown-item" routerLink="/signup" *ngIf="correoLogueado==''">Sign-up</a></li>
-            <li><a class="dropdown-item" (click)="Logout()" *ngIf="correoLogueado!=''">Logout</a></li>
+            <li><a class="dropdown-item" routerLink="/login" *ngIf="correoLogueado == ''">Login</a></li>
+            <li><a class="dropdown-item" routerLink="/signup" *ngIf="correoLogueado == ''">Sign-up</a></li>
+            <li><a class="dropdown-item" (click)="Logout()" *ngIf="correoLogueado != ''">Logout</a></li>
           </ul>
         </li>
       </ul>

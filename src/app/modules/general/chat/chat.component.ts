@@ -39,6 +39,10 @@ export class ChatComponent implements OnInit,AfterViewChecked, OnDestroy {
     this.scrollToBottom();
   }
 
+  getUserFromLocalStorage(): string | null {
+    return localStorage.getItem('user');
+  }  
+
   SentMessage(message: string) {
     this.message = '';
     this.chatService.SaveChat(message);

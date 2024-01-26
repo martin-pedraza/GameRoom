@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TriviaService {
-  private apiArt = 'https://opentdb.com/api.php?amount=10&category=25&type=multiple';
-  private apiSports = 'https://opentdb.com/api.php?amount=10&category=21&type=multiple';
-  private apiHistory = 'https://opentdb.com/api.php?amount=10&category=23&type=multiple';
-  private apiGeography = 'https://opentdb.com/api.php?amount=10&category=22&type=multiple';
-  private apiScience = 'https://opentdb.com/api.php?amount=10&category=17&type=multiple';
-  private apiEntertainment = 'https://opentdb.com/api.php?amount=10&category=11&type=multiple';
+  private apiArt = 'https://the-trivia-api.com/v2/questions?categories=art';
+  private apiSports = 'https://the-trivia-api.com/v2/questions?categories=sports';
+  private apiHistory = 'https://the-trivia-api.com/v2/questions?categories=history';
+  private apiGeography = 'https://the-trivia-api.com/v2/questions?categories=geography';
+  private apiScience = 'https://the-trivia-api.com/v2/questions?categories=science';
+  private apiEntertainment = 'https://the-trivia-api.com/v2/questions?categories=film_and_tv';
   private apiAll = [this.apiArt, this.apiSports, this.apiHistory, this.apiGeography, this.apiScience, this.apiEntertainment];
   public character = "";
   public characters = [

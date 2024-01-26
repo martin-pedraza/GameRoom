@@ -1,6 +1,6 @@
 <div *ngIf="!started" style="height: 100%;">
     <div style="height: 90%;" class="d-flex justify-content-center align-items-center">
-        <span style="font-size: 8em;">10</span>
+        <span style="font-size: 5em;">10</span>
         <span class="text-secondary" style="font-size: 2em;">.000</span>
     </div>
     <button type="button" class="btn btn-outline-secondary btn-lg" (click)="startCountdown()">START</button>
@@ -8,7 +8,7 @@
 
 <div *ngIf="started" style="height: 100%;">
     <div style="height: 90%;" class="d-flex justify-content-center align-items-center">
-        <span style="font-size: 8em;">{{seconds}}</span>
+        <span style="font-size: 5em;">{{seconds}}</span>
         <span class="text-secondary" style="font-size: 2em;">.{{milliseconds}}</span>
     </div>
     <div class="d-flex justify-content-center">

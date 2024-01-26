@@ -8,7 +8,6 @@ import { HomeComponent } from './modules/general/home/home.component';
 import { LoginComponent } from './modules/general/login/login.component';
 import { ErrorComponent } from './modules/general/error/error.component';
 import { UserComponent } from './modules/general/user/user.component';
-import { FooterComponent } from './modules/layout/partials/footer/footer.component';
 import { NavbarComponent } from './modules/layout/partials/navbar/navbar.component';
 import { PrincipalComponent } from './modules/layout/principal/principal.component';
 import { SignupComponent } from './modules/general/signup/signup.component';
@@ -19,6 +18,7 @@ import { ChatComponent } from './modules/general/chat/chat.component';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { GamesComponent } from './games/games.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ResultsComponent } from './modules/general/results/results.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +27,12 @@ import { HttpClientModule } from '@angular/common/http';
     ErrorComponent,
     HomeComponent,
     UserComponent,
-    FooterComponent,
     NavbarComponent,
     PrincipalComponent,
     SignupComponent,
     ChatComponent,
-    GamesComponent
+    GamesComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

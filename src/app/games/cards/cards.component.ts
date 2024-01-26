@@ -23,6 +23,7 @@ export class CardsComponent implements OnInit {
   nextCard: string = this.back;
   points: number = 0;
   gameOver: boolean = false;
+  disableButton = false;
 
   constructor() {}
 
@@ -31,12 +32,16 @@ export class CardsComponent implements OnInit {
   }
 
   onHigher(): void {
-    this.nextCard = this.pickRandomCard();
+    do {
+      this.nextCard = this.pickRandomCard();
+    } while (this.nextCard == this.currentCard);
     this.compareCards(true);
   }
 
   onLower(): void {
-    this.nextCard = this.pickRandomCard();
+    do {
+      this.nextCard = this.pickRandomCard();
+    } while (this.nextCard == this.currentCard);
     this.compareCards(false);
   }
 
@@ -48,10 +53,10 @@ export class CardsComponent implements OnInit {
   private compareCards(higher: boolean) {
     if (higher) {
       if (
-        this.cards.indexOf(this.currentCard) <= this.cards.indexOf(this.nextCard)
+        this.cards.indexOf(this.currentCard) <=
+        this.cards.indexOf(this.nextCard)
       ) {
-        this.currentCard = this.nextCard;
-        this.nextCard = this.back;
+        this.flipCard();
         this.gainPoint();
       } else {
         this.loseGame();
@@ -60,15 +65,24 @@ export class CardsComponent implements OnInit {
 
     if (!higher) {
       if (
-        this.cards.indexOf(this.currentCard) >= this.cards.indexOf(this.nextCard)
+        this.cards.indexOf(this.currentCard) >=
+        this.cards.indexOf(this.nextCard)
       ) {
-        this.currentCard = this.nextCard;
-        this.nextCard = this.back;
+        this.flipCard();
         this.gainPoint();
       } else {
         this.loseGame();
       }
     }
+  }
+
+  private flipCard() {
+    this.disableButton = true;
+    setTimeout(() => {
+      this.currentCard = this.nextCard;
+      this.nextCard = this.back;
+      this.disableButton = false;
+    }, 1500);
   }
 
   private gainPoint() {
@@ -77,11 +91,13 @@ export class CardsComponent implements OnInit {
 
   private loseGame() {
     this.gameOver = true;
+    this.disableButton = true;
   }
 
   public restartGame() {
     this.points = 0;
     this.gameOver = false;
+    this.disableButton = false;
     this.currentCard = this.pickRandomCard();
     this.nextCard = this.back;
   }
