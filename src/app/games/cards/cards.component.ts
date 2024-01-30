@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ResultService } from 'src/app/services/result/result.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-cards',
@@ -25,7 +27,10 @@ export class CardsComponent implements OnInit {
   gameOver: boolean = false;
   disableButton = false;
 
-  constructor() {}
+  constructor(
+    private resultService: ResultService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.currentCard = this.pickRandomCard();
@@ -90,6 +95,7 @@ export class CardsComponent implements OnInit {
   }
 
   private loseGame() {
+    this.saveScore();
     this.gameOver = true;
     this.disableButton = true;
   }
@@ -100,5 +106,11 @@ export class CardsComponent implements OnInit {
     this.disableButton = false;
     this.currentCard = this.pickRandomCard();
     this.nextCard = this.back;
+  }
+
+  saveScore() {
+    if (this.userService.logged) {
+      this.resultService.SaveCardsScore(this.points.toString());
+    }
   }
 }

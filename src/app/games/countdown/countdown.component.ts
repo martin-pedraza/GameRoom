@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ResultService } from 'src/app/services/result/result.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-countdown',
@@ -12,6 +14,11 @@ export class CountdownComponent {
   milliseconds: string = '000';
   started: boolean = false;
   stopped: boolean = false;
+
+  constructor(
+    private userService: UserService,
+    private resultService: ResultService
+  ) {}
 
   startCountdown() {
     this.started = true;
@@ -42,5 +49,12 @@ export class CountdownComponent {
 
   stopCountdown() {
     this.stopped = true;
+    this.saveScore();
+  }
+
+  saveScore() {
+    if (this.userService.logged) {
+      this.resultService.SaveCountdownScore(`${this.seconds}.${this.milliseconds}`);
+    }
   }
 }

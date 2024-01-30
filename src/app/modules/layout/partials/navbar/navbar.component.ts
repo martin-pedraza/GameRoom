@@ -14,34 +14,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private router: Router,
-    private auth: Auth
   ) {}
 
   ngOnDestroy(): void {
-    if (this.suscription) {
-      this.suscription();
-    }
   }
   ngOnInit(): void {
-    this.SaveUser();
+  }
+
+  CheckUser(){
+    return this.userService.currentUser
   }
 
   public Logout() {
     this.userService.Logout();
-    this.userService.logged = false;
-    localStorage.clear();
     this.router.navigateByUrl('home');
-  }
-
-  public SaveUser() {
-    this.suscription = this.auth.onAuthStateChanged((user) => {
-      if (user && user.email) {
-        this.correoLogueado = user.email;
-        localStorage.setItem('user', user.email.split('@')[0]);
-        console.log(localStorage.getItem('user'));
-      } else {
-        this.correoLogueado = '';
-      }
-    });
   }
 }

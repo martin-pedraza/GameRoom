@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ResultService } from 'src/app/services/result/result.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { WordsService } from 'src/app/services/words/words.service';
 
 @Component({
@@ -24,7 +26,11 @@ export class HangmanComponent implements OnInit {
   ];
   actualStage = this.images[0];
 
-  constructor(private wordsService: WordsService) {}
+  constructor(
+    private wordsService: WordsService,
+    private userService: UserService,
+    private resultService: ResultService
+  ) {}
 
   ngOnInit(): void {
     this.getNewWord();
@@ -65,6 +71,9 @@ export class HangmanComponent implements OnInit {
 
   verifyWord() {
     this.end = this.word.every((val, index) => val === this.guess[index]);
+    if (this.end) {
+      this.saveScore();
+    }
   }
 
   restarGame() {
@@ -94,5 +103,11 @@ export class HangmanComponent implements OnInit {
 
   updateStage(index: number) {
     this.actualStage = this.images[index];
+  }
+
+  saveScore() {
+    if (this.userService.logged) {
+      this.resultService.SaveHangmanScore(this.attempts.toString());
+    }
   }
 }

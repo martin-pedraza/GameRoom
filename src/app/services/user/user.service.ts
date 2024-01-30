@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -9,12 +9,25 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class UserService implements OnInit, OnDestroy {
+export class UserService {
   logged: boolean = false;
-  constructor(private auth: Auth) {}
+  public currentUser: string = '';
 
-  ngOnDestroy(): void {}
-  ngOnInit(): void {}
+  constructor(private auth: Auth) {
+    this.auth.onAuthStateChanged((user: any | null) => {
+      if (user) {
+        this.logged = true;
+        this.currentUser = user.email.split('@')[0] || '';
+      } else {
+        this.logged = false;
+        this.currentUser = '';
+      }
+    });
+
+    window.addEventListener('beforeunload', () => {
+      this.Logout();
+    });
+  }
 
   public Signup(email: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password);

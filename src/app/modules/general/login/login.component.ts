@@ -19,7 +19,6 @@ export class LoginComponent {
       .Login(email, password)
       .then((response) => {
         this.errors = '';
-        this.userService.logged = true;
         this.router.navigateByUrl('home');
       })
       .catch((error) => {

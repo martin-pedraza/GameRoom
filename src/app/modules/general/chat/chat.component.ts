@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ChatService } from 'src/app/services/chat/chat.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-chat',
@@ -20,7 +21,7 @@ export class ChatComponent implements OnInit,AfterViewChecked, OnDestroy {
   suscription: Subscription | undefined;
   chat: any[] = [];
 
-  constructor(public chatService: ChatService) {}
+  constructor(public chatService: ChatService, private userService: UserService) {}
 
   ngOnDestroy(): void {
     this.suscription?.unsubscribe();
@@ -39,9 +40,9 @@ export class ChatComponent implements OnInit,AfterViewChecked, OnDestroy {
     this.scrollToBottom();
   }
 
-  getUserFromLocalStorage(): string | null {
-    return localStorage.getItem('user');
-  }  
+  CheckUser(){
+    return this.userService.currentUser
+  } 
 
   SentMessage(message: string) {
     this.message = '';

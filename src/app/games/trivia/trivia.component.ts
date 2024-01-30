@@ -1,6 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ResultService } from 'src/app/services/result/result.service';
 import { TriviaService } from 'src/app/services/trivia/trivia.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-trivia',
@@ -20,7 +22,11 @@ export class TriviaComponent implements OnDestroy {
   score: number = 0;
   disabledButtons = false;
 
-  constructor(private triviaService: TriviaService) {}
+  constructor(
+    private triviaService: TriviaService,
+    private userService: UserService,
+    private resultService: ResultService
+  ) {}
 
   ngOnDestroy(): void {
     this.suscription?.unsubscribe();
@@ -87,15 +93,16 @@ export class TriviaComponent implements OnDestroy {
   }
 
   paintAnswer(answer: string) {
-    const correctAnswer = this.questions[this.currentQuestionIndex].correctAnswer;
-    
+    const correctAnswer =
+      this.questions[this.currentQuestionIndex].correctAnswer;
+
     if (answer !== correctAnswer) {
       const selectedAnswer = document.getElementById(answer);
       if (selectedAnswer) {
         selectedAnswer.style.backgroundColor = 'red';
       }
     }
-    
+
     const correctAnswerElement = document.getElementById(correctAnswer);
     if (correctAnswerElement) {
       correctAnswerElement.style.backgroundColor = 'green';
@@ -110,7 +117,14 @@ export class TriviaComponent implements OnDestroy {
   }
 
   finishGame() {
+    this.saveScore();
     this.started = false;
     this.finished = true;
+  }
+
+  saveScore() {
+    if (this.userService.logged) {
+      this.resultService.SaveTriviaScore(`${this.score}`);
+    }
   }
 }
