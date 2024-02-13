@@ -1,4 +1,4 @@
-# GAME ROOM - Web-Based Gaming Platform
+# GAME ROOM
 
 <img src="https://raw.githubusercontent.com/martin-pedraza/GameRoom/master/src/assets/icon.ico" width="150" height="150" alt="Sala Logo">
 
